@@ -1,0 +1,20 @@
+services:
+  dev:
+    build: docker/dev
+    entrypoint: tail -f /dev/null
+    environment:
+      GOPATH: /wd/_gopath
+    init: true
+    volumes:
+      - .:/wd
+      - ~/.ssh:/home/go-user/.ssh:ro
+    working_dir: /wd
+
+  doc:
+    build: docker/doc
+    entrypoint: pkgsite -http 0.0.0.0:8080 /wd
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/wd
+    # working_dir: /wd

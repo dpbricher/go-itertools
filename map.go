@@ -6,6 +6,10 @@ import (
 
 // Map creates a new [iter.Seq] by applying the given mapper func to the given [iter.Seq].
 //
+// For every item in `seq`, the `mapper` func will be called and passed that item as its sole argument. The output of the `mapper` func will then be included in the output [iter.Seq].
+//
+// The order of items in the output [iter.Seq] will match the order of the items that they are mapped from in `seq`.
+//
 //	input := slices.Values([]int{1, 2, 3})
 //	output := itertools.Map(input, func(item int) string {
 //	  return fmt.Sprintf("%d", item)
@@ -23,6 +27,8 @@ func Map[In, Out any](seq iter.Seq[In], mapper func(In) Out) iter.Seq[Out] {
 }
 
 // Map2 creates a new [iter.Seq2] by applying the given mapper func to the given [iter.Seq2].
+//
+// This func works the same as [Map], except that its input and output iterators are [iter.Seq2].
 //
 //	 input := slices.All([]int{1, 2, 3})
 //		output := itertools.Map2(input, func(index, item int) (int, string) {

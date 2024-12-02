@@ -7,7 +7,7 @@ import (
 
 var infiniteRangeMessageTemplate = "iterating over an infinite range (start: %d, step: %d, end: %d)"
 
-// Range creates an [iter.Seq] that will return all integers between `start` and `end`, including `start` and `end`.
+// Range creates an [iter.Seq] that will output all integers between `start` and `end`, including `start` and `end`.
 //
 //	slices.Collect(itertools.Range(1, 5)) // []int{1, 2, 3, 4, 5}
 func Range(start, end int) iter.Seq[int] {
@@ -18,7 +18,7 @@ func Range(start, end int) iter.Seq[int] {
 	return rangeDescending(start, end, -1)
 }
 
-// RangeStep creates an [iter.Seq] that will return all integers between `start` and `end`, in increments of `step`.
+// RangeStep creates an [iter.Seq] that will output all integers between `start` and `end`, in increments of `step`.
 //
 //	slices.Collect(itertools.Range(1, 5, 2)) // []int{1, 3, 5}
 //
@@ -29,6 +29,8 @@ func Range(start, end int) iter.Seq[int] {
 // If the specified `step` would result in an infinite iterator then the returned iterator will panic the first time that a value is read from it.
 //
 //	slices.Collect(itertools.Range(1, 5, -1)) // panics
+//
+// If a method that does not panic is desired, consider using either [Asc] or [Desc] instead.
 func RangeStep(start, end, step int) iter.Seq[int] {
 	if start < end {
 		return rangeAscending(start, end, step)

@@ -10,12 +10,12 @@ import (
 //
 // The intent behind `collector` is that it takes each item from the sequence and adds them to an accumulated total; the first argument to `collector` is the total so far, and the value returned from `collector` is the new total after the current item has been added into it. `initial` is used to give this total a starting value.
 //
-//	 input := slices.Values([]int{1, 2, 3})
-//		result := itertools.Reduce(input, func(total []int, item int) []int {
-//			return append(total, item)
-//		}, make([]int, 0, 3))
+//	input := slices.Values([]int{1, 2, 3})
+//	result := itertools.Reduce(input, func(total []int, item int) []int {
+//		return append(total, item)
+//	}, make([]int, 0, 3))
 //
-//		// result = []int{1, 2, 3}
+//	// result = []int{1, 2, 3}
 func Reduce[In, Out any](seq iter.Seq[In], collector func(Out, In) Out, initial Out) Out {
 	reduced := initial
 	for item := range seq {
@@ -28,12 +28,12 @@ func Reduce[In, Out any](seq iter.Seq[In], collector func(Out, In) Out, initial 
 //
 // This func works the same as [Reduce], except that the input iterator is [iter.Seq2].
 //
-//	 input := slices.All([]int{1, 2, 3})
-//		result := itertools.Reduce2(input, func(total []int, index, item int) []int {
-//			return append(total, index+item)
-//		}, make([]int, 0, 3))
+//	input := slices.All([]int{1, 2, 3})
+//	result := itertools.Reduce2(input, func(total []int, index, item int) []int {
+//		return append(total, index+item)
+//	}, make([]int, 0, 3))
 //
-//		// result = []int{1, 3, 5}
+//	// result = []int{1, 3, 5}
 func Reduce2[In1, In2, Out any](seq iter.Seq2[In1, In2], collector func(Out, In1, In2) Out, initial Out) Out {
 	reduced := initial
 	for item1, item2 := range seq {

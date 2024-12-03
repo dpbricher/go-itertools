@@ -1,6 +1,9 @@
 package itertools
 
-import "iter"
+import (
+	"iter"
+	"math"
+)
 
 // Asc creates an [iter.Seq] that will output an ascending sequence of integers.
 //
@@ -11,8 +14,11 @@ import "iter"
 //	input := Asc(1, 1, 3)
 //	output := slices.Collect(input) // []int{1, 2, 3}
 func Asc(start int, step, count uint) iter.Seq[int] {
+	stepSigned := int(step & math.MaxInt)
+	countSigned := int(count & math.MaxInt)
+
 	return func(yield func(int) bool) {
-		for i := uint(0); i < count; i += step {
+		for i := 0; i < countSigned; i += stepSigned {
 			if !yield(start + int(i)) {
 				return
 			}
@@ -29,8 +35,11 @@ func Asc(start int, step, count uint) iter.Seq[int] {
 //	input := Desc(3, 1, 3)
 //	output := slices.Collect(input) // []int{3, 2, 1}
 func Desc(start int, step, count uint) iter.Seq[int] {
+	stepSigned := int(step & math.MaxInt)
+	countSigned := int(count & math.MaxInt)
+
 	return func(yield func(int) bool) {
-		for i := uint(0); i < count; i += step {
+		for i := 0; i < countSigned; i += stepSigned {
 			if !yield(start - int(i)) {
 				return
 			}

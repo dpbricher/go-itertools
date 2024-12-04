@@ -6,9 +6,9 @@ import (
 
 // Filter wraps an [iter.Seq] and drops items that do not match a supplied filtering func.
 //
-// For every item in `seq`, the `filter` func will be called and passed that item as its sole argument. If that call to `filter` returns `true` then that item will be included in the output [iter.Seq], otherwise it will be discarded.
+// For every item in seq, filter will be called and passed that item as its sole argument. If that call to filter returns true then that item will be included in the output [iter.Seq], otherwise it will be discarded.
 //
-// The order of items in the output [iter.Seq] will match the order that they appear in `seq`.
+// The order of items in the output [iter.Seq] will match the order that they appear in seq.
 //
 //	input := slices.Values([]int{0, 1, 2, 3})
 //	filteredIter := itertools.Filter(input, func(item int) bool {

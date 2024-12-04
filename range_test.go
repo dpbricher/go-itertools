@@ -1,7 +1,6 @@
 package itertools
 
 import (
-	"fmt"
 	"slices"
 	"testing"
 
@@ -97,15 +96,13 @@ func (suite *RangeStepSuite) TestAscending() {
 		end := 5
 		step := 0
 
-		suite.PanicsWithValue(fmt.Sprintf(infiniteRangeMessageTemplate, start, step, end), func() {
-			slices.Collect(RangeStep(start, end, step))
-		})
+		actualSlice := slices.Collect(RangeStep(start, end, step))
+		suite.Equal([]int(nil), actualSlice)
 	})
 
 	suite.Run("Wrong step direction", func() {
-		suite.Panics(func() {
-			slices.Collect(RangeStep(1, 5, -1))
-		})
+		actualSlice := slices.Collect(RangeStep(1, 5, -1))
+		suite.Equal([]int(nil), actualSlice)
 	})
 }
 
@@ -131,15 +128,13 @@ func (suite *RangeStepSuite) TestDescending() {
 	})
 
 	suite.Run("Zero step", func() {
-		suite.Panics(func() {
-			slices.Collect(RangeStep(5, 1, 0))
-		})
+		actualSlice := slices.Collect(RangeStep(5, 1, 0))
+		suite.Equal([]int(nil), actualSlice)
 	})
 
 	suite.Run("Wrong step direction", func() {
-		suite.Panics(func() {
-			slices.Collect(RangeStep(5, 1, 1))
-		})
+		actualSlice := slices.Collect(RangeStep(5, 1, 1))
+		suite.Equal([]int(nil), actualSlice)
 	})
 }
 

@@ -17,4 +17,3 @@ services:
       - "8080:8080"
     volumes:
       - .:/wd
-    # working_dir: /wd

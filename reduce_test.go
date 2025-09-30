@@ -42,6 +42,17 @@ func (suite *ReduceSuite) TestReduce() {
 	})
 }
 
+func (suite *ReduceSuite) TestReduceBreak() {
+	input := slices.Values([]int{1, 2})
+	suite.NotPanics(func() {
+		for range Reduce(input, func(total, item int) int {
+			return 0
+		}, 0) {
+			break
+		}
+	})
+}
+
 func (suite *ReduceSuite) TestReduce2() {
 	suite.Run("Reduce to string", func() {
 		input := slices.All([]int{1, 2, 3})
@@ -69,6 +80,17 @@ func (suite *ReduceSuite) TestReduce2() {
 		}, make(map[int]int))
 
 		suite.Equal(map[int]int{0: 1, 1: 2, 2: 3}, result)
+	})
+}
+
+func (suite *ReduceSuite) TestReduce2Break() {
+	input := slices.All([]int{1, 2})
+	suite.NotPanics(func() {
+		for range Reduce2(input, func(total, index, item int) int {
+			return 0
+		}, 0) {
+			break
+		}
 	})
 }
 

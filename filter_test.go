@@ -23,6 +23,17 @@ func (suite *FilterSuite) TestFilter() {
 	suite.Equal([]int{0, 2}, actualSlice)
 }
 
+func (suite *FilterSuite) TestFilterBreak() {
+	input := slices.Values([]int{0, 1})
+	suite.NotPanics(func() {
+		for range Filter(input, func(item int) bool {
+			return true
+		}) {
+			break
+		}
+	})
+}
+
 func (suite *FilterSuite) TestFilterMultiUse() {
 	input := slices.Values([]int{0, 1, 2, 3})
 	iterator := Filter(input, func(item int) bool {
@@ -45,6 +56,17 @@ func (suite *FilterSuite) TestFilter2() {
 	)
 
 	suite.Equal(map[int]int{0: 0, 3: 3}, actualSlice)
+}
+
+func (suite *FilterSuite) TestFilter2Break() {
+	input := slices.All([]int{0, 1})
+	suite.NotPanics(func() {
+		for range Filter2(input, func(index, item int) bool {
+			return true
+		}) {
+			break
+		}
+	})
 }
 
 func (suite *FilterSuite) TestFilter2MultiUse() {

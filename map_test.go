@@ -24,6 +24,17 @@ func (suite *MapSuite) TestMap() {
 	suite.Equal([]string{"1", "2", "3"}, output)
 }
 
+func (suite *MapSuite) TestMapBreak() {
+	input := slices.Values([]int{1, 2})
+	suite.NotPanics(func() {
+		for range Map(input, func(item int) bool {
+			return false
+		}) {
+			break
+		}
+	})
+}
+
 func (suite *MapSuite) TestMap2() {
 	input := slices.All([]int{1, 2, 3})
 	output := maps.Collect(
@@ -33,6 +44,17 @@ func (suite *MapSuite) TestMap2() {
 	)
 
 	suite.Equal(map[int]string{0: "1", 1: "2", 2: "3"}, output)
+}
+
+func (suite *MapSuite) TestMap2Break() {
+	input := slices.All([]int{1, 2})
+	suite.NotPanics(func() {
+		for range Map2(input, func(index, item int) (int, bool) {
+			return 0, true
+		}) {
+			break
+		}
+	})
 }
 
 func TestMap(t *testing.T) {

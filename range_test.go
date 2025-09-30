@@ -28,6 +28,14 @@ func (suite *RangeSuite) TestAscending() {
 	})
 }
 
+func (suite *RangeSuite) TestBreak() {
+	suite.NotPanics(func() {
+		for range Range(1, 3) {
+			break
+		}
+	})
+}
+
 func (suite *RangeSuite) TestDescending() {
 	suite.Run("+ve to +ve", func() {
 		actualSlice := slices.Collect(Range(3, 1))
@@ -103,6 +111,14 @@ func (suite *RangeStepSuite) TestAscending() {
 	suite.Run("Wrong step direction", func() {
 		actualSlice := slices.Collect(RangeStep(1, 5, -1))
 		suite.Equal([]int(nil), actualSlice)
+	})
+}
+
+func (suite *RangeStepSuite) TestBreak() {
+	suite.NotPanics(func() {
+		for range RangeStep(1, 1, 3) {
+			break
+		}
 	})
 }
 

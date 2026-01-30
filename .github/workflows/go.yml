@@ -8,9 +8,9 @@ jobs:
       - name: Install dependencies
         run: go mod download
       - name: Build tests
-        run: go test -c ./...
+        run: go test -c ./itertools
       - name: Run tests
-        run: ./go-itertools.test -test.v
+        run: ./itertools.test -test.v
 
 name: Test
 
@@ -21,4 +21,4 @@ on:
     types:
       - opened
       - edited
-      - reopened 
+      - reopened

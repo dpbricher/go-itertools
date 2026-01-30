@@ -10,10 +10,9 @@ This project contains Docker Compose services that can be used for development.
   ```
   $ docker compose up -d dev
   $ docker compose exec dev bash
-  go-user@...:/wd$ go test
+  go-user@...:/wd$ go test ./itertools
   PASS
-  ok      dpbricher.com/itertools 0.008s
-  go-user@...:/wd$
+  ok      github.com/dpbricher/go-itertools/itertools     0.006s
   ```
 - The `doc` service can be used to preview the package docs
   - start the service with `docker compose up doc`

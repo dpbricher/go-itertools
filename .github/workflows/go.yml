@@ -1,0 +1,24 @@
+jobs:
+  test:
+    container: golang:1.23-bookworm
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Install dependencies
+        run: go mod download
+      - name: Build tests
+        run: go test -c ./...
+      - name: Run tests
+        run: ./go-itertools.test -test.v
+
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - reopened 
